@@ -1,0 +1,8 @@
+{
+  "title": "Servidor CORS",
+  "description": "Teste de endpoints com e sem CORS.",
+  "buttonSemCORS": "Sem CORS",
+  "buttonComCORS": "Com CORS",
+  "buttonCorsRestrito": "CORS Restrito",
+  "resultPlaceholder": "Clique em um botão para testar o endpoint."
+}
