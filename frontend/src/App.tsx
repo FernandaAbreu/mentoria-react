@@ -1,5 +1,5 @@
 import i18n from './i18n'; // importa e inicializa i18next antes de usar useTranslation
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactCountryFlag from 'react-country-flag';
 
@@ -7,7 +7,9 @@ type ResponseData = {
   message: string;
 };
 
-// importa a configuração/inicialização do i18n (carrega src/i18n/index.ts)
+// Lazy load remote components
+const Cart = lazy(() => import('cartModule/Cart'));
+const Payment = lazy(() => import('cartModule/Payment'));
 
 function App() {
   const { t } = useTranslation();
@@ -32,6 +34,15 @@ function App() {
   useEffect(() => {
     setResponse(t('resultPlaceholder'));
   }, [t, i18n.language]); // i18n aqui é o import acima
+
+  const products = [
+    { id: 1, name: 'Produto 1', price: 10 },
+    { id: 2, name: 'Produto 2', price: 20 },
+  ];
+
+  const addToCart = (product: { id: number; name: string; price: number }) => {
+    window.dispatchEvent(new CustomEvent('addToCart', { detail: product }));
+  };
 
   return (
     <div style={{ padding: 20, fontFamily: 'sans-serif' }}>
@@ -82,6 +93,26 @@ function App() {
       </div>
 
       <pre style={{ marginTop: 20 }}>{response}</pre>
+
+      {/* MFE Section */}
+      <h2>Micro Frontends - Carrinho e Pagamento</h2>
+      <div>
+        <h3>Produtos</h3>
+        <ul>
+          {products.map(product => (
+            <li key={product.id}>
+              {product.name} - R$ {product.price}
+              <button onClick={() => addToCart(product)}>Adicionar ao Carrinho</button>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <Suspense fallback={<div>Loading Cart...</div>}>
+        <Cart />
+      </Suspense>
+      <Suspense fallback={<div>Loading Payment...</div>}>
+        <Payment />
+      </Suspense>
     </div>
   );
 }

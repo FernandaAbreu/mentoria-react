@@ -7,17 +7,19 @@ export default defineConfig({
   plugins: [
     react(),
     federation({
-      name: 'host-app',
-      remotes: {
-        cartModule: 'http://localhost:5174/assets/remoteEntry.js',
+      name: 'cartModule',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './Cart': './src/Cart.tsx',
+        './Payment': './src/Payment.tsx',
       },
       shared: ['react', 'react-dom'],
     }),
   ],
   server: {
-    port: 3000,
-    proxy: {
-      '/api': 'http://localhost:4000'
-    }
-  }
+    port: 5174,
+  },
+  build: {
+    target: 'esnext',
+  },
 })

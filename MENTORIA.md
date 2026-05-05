@@ -1,10 +1,13 @@
-# Plano de Mentoria — Índice (3 semanas)
+# Plano de Mentoria — Índice (6 semanas)
 
 Deixei os detalhes separados por arquivo para facilitar a leitura. Abra o arquivo correspondente à semana:
 
 - Semana 1 — Ferramentas de build: MENTORSHIP_WEEK1.md
 - Semana 2 — Testes unitários (frontend): MENTORSHIP_WEEK2.md
 - Semana 3 — Testes unitários (backend) e CORS/integração: MENTORSHIP_WEEK3.md
+- Semana 4 — Docker: MENTORSHIP_WEEK4.md
+- Semana 5 — Kubernetes: MENTORSHIP_WEEK5.md
+- Semana 6 — Micro Frontends: MENTORSHIP_WEEK6.md
 
 Checklist rápido
 - Rodar `npm install` nas pastas frontend e backend.
